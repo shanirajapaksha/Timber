@@ -1,0 +1,6 @@
+{
+  "name": "Rupasinghe Timber Works",
+  "description": "Premium Sri Lankan timber supplier and manufacturer of high-quality doors, frames, sashes, and custom timber products since 2010 in Kaduwela.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
