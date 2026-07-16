@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { ArrowRight, Award, ShieldCheck, CheckCircle2, Calendar } from 'lucide-react';
+import heroImgSrc from '../assets/images/hero_timber_works_1783420008237.jpg';
 
 export default function Hero() {
   const containerVariants = {
@@ -48,9 +49,6 @@ export default function Hero() {
       position: 'bottom-8 right-4',
     },
   ];
-
-  // Referencing the generated image from our assets folder
-  const heroImgSrc = "/src/assets/images/hero_timber_works_1783420008237.jpg";
 
   return (
     <section

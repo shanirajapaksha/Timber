@@ -1,5 +1,7 @@
 import { motion } from 'motion/react';
 import { Layers3, Hammer, Sparkles, Check, ChevronRight } from 'lucide-react';
+import timberRawMaterialImg from '../assets/images/timber_raw_material_1783420040716.jpg';
+import mahoganyDoorImg from '../assets/images/mahogany_door_1783420024855.jpg';
 
 export default function Services() {
   const categories = [
@@ -10,7 +12,7 @@ export default function Services() {
       icon: <Layers3 className="w-6 h-6 text-brand-amber" />,
       description:
         'Sourcing and preparing finest local and imported wood stocks. Engineered to provide structural stability, durability, and natural aesthetic brilliance for architects and commercial builders.',
-      image: '/src/assets/images/timber_raw_material_1783420040716.jpg',
+      image: timberRawMaterialImg,
       points: [
         'Large, seasonally managed stock of high-grade local timber',
         'Sturdy timber materials tailored specifically for construction load-bearing',
@@ -26,7 +28,7 @@ export default function Services() {
       icon: <Hammer className="w-6 h-6 text-brand-amber" />,
       description:
         'Custom precision crafting using advanced machinery and experienced joiners. We design, paint, and pre-assemble architectural components that enhance the interior prestige of luxury structures.',
-      image: '/src/assets/images/mahogany_door_1783420024855.jpg',
+      image: mahoganyDoorImg,
       points: [
         'Custom engineered timber sashes and high-precision window structures',
         'Durable, warp-resistant structural timber frames',

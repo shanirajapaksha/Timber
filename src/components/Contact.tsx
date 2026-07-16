@@ -14,6 +14,8 @@ export default function Contact() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  const formEndpoint = import.meta.env.VITE_FORM_ENDPOINT?.trim();
 
   const projectOptions = [
     { value: 'residential', label: 'Residential Custom Doors & Frames' },
@@ -55,22 +57,45 @@ export default function Contact() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (validate()) {
-      setIsSubmitting(true);
-      // Simulate submission
-      setTimeout(() => {
-        setIsSubmitting(false);
-        setIsSuccess(true);
-        setFormData({
-          name: '',
-          phone: '',
-          email: '',
-          projectType: '',
-          message: '',
-        });
-      }, 1500);
+    setSubmitError('');
+
+    if (!validate()) {
+      return;
+    }
+
+    if (!formEndpoint) {
+      setSubmitError('Quote submission is not configured yet. Please contact us by phone, WhatsApp, or email.');
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const response = await fetch(formEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Form endpoint responded with ${response.status}`);
+      }
+
+      setIsSuccess(true);
+      setFormData({
+        name: '',
+        phone: '',
+        email: '',
+        projectType: '',
+        message: '',
+      });
+    } catch {
+      setSubmitError('We could not send your request right now. Please try again or contact us directly.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -287,6 +312,12 @@ export default function Contact() {
                       />
                       {errors.message && <p className="text-red-500 text-xs mt-1 font-mono">{errors.message}</p>}
                     </div>
+
+                    {submitError && (
+                      <p className="text-red-500 text-xs font-mono" role="alert">
+                        {submitError}
+                      </p>
+                    )}
 
                     {/* Submit Button */}
                     <button
