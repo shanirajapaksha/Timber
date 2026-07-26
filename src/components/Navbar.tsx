@@ -65,7 +65,7 @@ export default function Navbar() {
               <Layers className="w-5 h-5" />
             </div>
             <div>
-              <span className="font-display text-lg font-bold tracking-tight text-brand-charcoal block leading-none">
+              <span className="font-display text-base sm:text-lg font-bold tracking-tight text-brand-charcoal block leading-none">
                 RUPASINGHE
               </span>
               <span className="font-mono text-[9px] uppercase tracking-widest text-brand-muted block mt-1">
@@ -102,11 +102,11 @@ export default function Navbar() {
           </nav>
 
           {/* Mobile Menu Button */}
-          <div className="lg:hidden flex items-center gap-4">
+          <div className="lg:hidden flex items-center gap-2 min-[360px]:gap-4">
             <a
               href="#contact"
               onClick={(event) => handleNavClick(event, '#contact')}
-              className="px-4 py-2 bg-brand-charcoal text-brand-cream text-xs uppercase tracking-wider font-semibold rounded-full hover:bg-brand-copper transition-colors"
+              className="hidden min-[360px]:inline-flex px-4 py-2 bg-brand-charcoal text-brand-cream text-xs uppercase tracking-wider font-semibold rounded-full hover:bg-brand-copper transition-colors"
             >
               Quote
             </a>

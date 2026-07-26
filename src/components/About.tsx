@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { motion, useInView, useMotionValue, useSpring } from 'motion/react';
 import { Shield, Users, Clock, Compass } from 'lucide-react';
 
-function Counter({ value, suffix = '', duration = 2 }) {
+function Counter({ value, suffix = '', className = '' }) {
   const [displayVal, setDisplayVal] = useState(0);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
@@ -22,7 +22,7 @@ function Counter({ value, suffix = '', duration = 2 }) {
   }, [springVal]);
 
   return (
-    <span ref={ref} className="font-display font-bold text-4xl sm:text-5xl text-brand-charcoal tracking-tight">
+    <span ref={ref} className={`font-display font-bold text-4xl sm:text-5xl tracking-tight ${className}`}>
       {displayVal}
       {suffix}
     </span>
@@ -101,8 +101,8 @@ export default function About() {
               className="grid grid-cols-2 gap-6 sm:gap-8 bg-brand-clay p-8 rounded-2xl text-brand-cream shadow-xl"
             >
               <div className="flex flex-col border-r border-brand-cream/10 pr-4">
-                <div className="flex items-baseline gap-1 mb-2 text-brand-amber">
-                  <Counter value={2010} suffix="" />
+                <div className="flex items-baseline gap-1 mb-2">
+                  <Counter value={2010} suffix="" className="text-brand-cream" />
                 </div>
                 <span className="text-xs uppercase tracking-wider text-brand-cream/60 font-mono">
                   Established Year
@@ -110,26 +110,26 @@ export default function About() {
               </div>
               
               <div className="flex flex-col pl-4">
-                <div className="flex items-baseline gap-1 mb-2 text-brand-amber">
-                  <Counter value={15} suffix="+" />
+                <div className="flex items-baseline gap-1 mb-2">
+                  <Counter value={15} suffix="+" className="text-brand-amber" />
                 </div>
                 <span className="text-xs uppercase tracking-wider text-brand-cream/60 font-mono">
                   Years of Experience
                 </span>
               </div>
 
-              <div className="flex flex-col border-r border-brand-cream/10 pr-4 pt-6 border-t">
-                <div className="flex items-baseline gap-1 mb-2 text-brand-amber">
-                  <Counter value={100} suffix="%" />
+              <div className="flex flex-col border-r border-brand-cream/10 pr-4 pt-6 border-t border-brand-cream/10">
+                <div className="flex items-baseline gap-1 mb-2">
+                  <Counter value={100} suffix="%" className="text-brand-amber" />
                 </div>
                 <span className="text-xs uppercase tracking-wider text-brand-cream/60 font-mono">
                   Tested Mahogany Quality
                 </span>
               </div>
 
-              <div className="flex flex-col pl-4 pt-6 border-t">
-                <div className="flex items-baseline gap-1 mb-2 text-brand-amber">
-                  <Counter value={4000} suffix="+" />
+              <div className="flex flex-col pl-4 pt-6 border-t border-brand-cream/10">
+                <div className="flex items-baseline gap-1 mb-2">
+                  <Counter value={4000} suffix="+" className="text-brand-cream" />
                 </div>
                 <span className="text-xs uppercase tracking-wider text-brand-cream/60 font-mono">
                   Planks Kiln-Dried

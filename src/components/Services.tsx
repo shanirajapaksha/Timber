@@ -41,7 +41,7 @@ export default function Services() {
   ];
 
   return (
-    <section id="services" className="py-24 bg-brand-cream relative">
+    <section id="services" className="py-24 bg-brand-cream relative overflow-hidden">
       {/* Background aesthetics */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[350px] h-[350px] bg-brand-amber/5 rounded-full blur-3xl pointer-events-none" />
 

@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { MapPin, Phone, Mail, CheckCircle2, Send, MessageSquare } from 'lucide-react';
 
+const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
+const WEB3FORMS_ACCESS_KEY = 'ae08340d-739d-465c-b4a9-5165b9b37613';
+
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
@@ -15,7 +18,6 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [submitError, setSubmitError] = useState('');
-  const formEndpoint = import.meta.env.VITE_FORM_ENDPOINT?.trim();
 
   const projectOptions = [
     { value: 'residential', label: 'Residential Custom Doors & Frames' },
@@ -65,22 +67,30 @@ export default function Contact() {
       return;
     }
 
-    if (!formEndpoint) {
-      setSubmitError('Quote submission is not configured yet. Please contact us by phone, WhatsApp, or email.');
-      return;
-    }
-
     setIsSubmitting(true);
     try {
-      const response = await fetch(formEndpoint, {
+      const selectedProjectType = projectOptions.find((option) => option.value === formData.projectType)?.label;
+      const response = await fetch(WEB3FORMS_ENDPOINT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: `New Quote Request - ${selectedProjectType ?? 'Timber Project'}`,
+          from_name: 'Rupasinghe Timber Works Website',
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          project_type: selectedProjectType,
+          message: formData.message,
+          botcheck: '',
+        }),
       });
 
-      if (!response.ok) {
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
         throw new Error(`Form endpoint responded with ${response.status}`);
       }
 
@@ -100,7 +110,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 bg-brand-cream border-t border-brand-charcoal/5 relative">
+    <section id="contact" className="py-24 bg-brand-cream border-t border-brand-charcoal/5 relative overflow-hidden">
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-brand-amber/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">

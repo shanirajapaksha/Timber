@@ -92,8 +92,7 @@ export default function Footer() {
         {/* Bottom row */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-[10px] text-brand-cream/40 font-mono text-center sm:text-left">
-            © 2026 RUPASINGHE TIMBER WORKS. ALL RIGHTS RESERVED. <br className="sm:hidden" />
-            DEVELOPED FOR MAXIMUM CONSTRUCTION ENDURANCE.
+            © 2026 RUPASINGHE TIMBER WORKS. ALL RIGHTS RESERVED.
           </p>
 
           <button

@@ -48,7 +48,7 @@ export default function Process() {
   ];
 
   return (
-    <section id="process" className="py-24 bg-brand-cream relative">
+    <section id="process" className="py-24 bg-brand-cream relative overflow-hidden">
       <div className="absolute top-1/3 right-1/4 w-[300px] h-[300px] bg-brand-amber/5 rounded-full blur-[80px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">

@@ -98,8 +98,8 @@ export default function WhyChooseUs() {
             >
               <div>
                 {/* Icon box */}
-                <div className="w-12 h-12 rounded-xl bg-brand-cream/5 flex items-center justify-center mb-6 transition-all group-hover:bg-brand-amber group-hover:text-brand-charcoal">
-                  <div className="transition-transform group-hover:scale-110">
+                <div className="w-12 h-12 rounded-xl bg-brand-cream/5 flex items-center justify-center mb-6 transition-all group-hover:bg-brand-amber">
+                  <div className="transition-transform group-hover:scale-110 group-hover:[&_svg]:text-brand-charcoal">
                     {card.icon}
                   </div>
                 </div>

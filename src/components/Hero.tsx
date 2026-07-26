@@ -1,6 +1,9 @@
+import { lazy, Suspense } from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, Award, ShieldCheck, CheckCircle2, Calendar } from 'lucide-react';
 import heroImgSrc from '../assets/images/hero_timber_works_1783420008237.jpg';
+
+const Hero3DTimberScene = lazy(() => import('./Hero3DTimberScene'));
 
 export default function Hero() {
   const containerVariants = {
@@ -55,9 +58,11 @@ export default function Hero() {
       id="hero"
       className="relative min-h-screen pt-32 pb-20 flex items-center overflow-hidden bg-brand-cream"
     >
-      {/* Background elegant gradient accent */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-brand-amber/5 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-brand-olive/5 blur-[100px] pointer-events-none" />
+      <Suspense fallback={null}>
+        <Hero3DTimberScene />
+      </Suspense>
+      <div className="absolute inset-0 bg-gradient-to-r from-brand-cream via-brand-cream/92 to-brand-cream/60 pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-brand-cream to-transparent pointer-events-none" />
 
       {/* Grid Pattern overlay */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(18,18,18,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(18,18,18,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />

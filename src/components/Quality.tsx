@@ -30,7 +30,7 @@ export default function Quality() {
   ];
 
   return (
-    <section id="quality" className="py-24 bg-brand-cream relative">
+    <section id="quality" className="py-24 bg-brand-cream relative overflow-hidden">
       {/* Background soft glow */}
       <div className="absolute top-0 left-1/4 w-[400px] h-[400px] bg-brand-olive/5 rounded-full blur-[100px] pointer-events-none" />
 
