@@ -3,6 +3,7 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Services from './components/Services';
 import WhyChooseUs from './components/WhyChooseUs';
+import WorkGallery from './components/WorkGallery';
 import Projects from './components/Projects';
 import Clients from './components/Clients';
 import Quality from './components/Quality';
@@ -32,6 +33,9 @@ export default function App() {
 
         {/* Why Choose RTW Highlights */}
         <WhyChooseUs />
+
+        {/* Recently Completed Work Photos */}
+        <WorkGallery />
 
         {/* Key Projects Showcase Grid */}
         <Projects />
