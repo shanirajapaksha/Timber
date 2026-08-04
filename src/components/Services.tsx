@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { Layers3, Hammer, Sparkles, Check, ChevronRight } from 'lucide-react';
 import timberRawMaterialImg from '../assets/images/timber_raw_material_1783420040716.jpg';
 import mahoganyDoorImg from '../assets/images/mahogany_door_1783420024855.jpg';
+import { navigateTo } from '../navigation';
 
 export default function Services() {
   const categories = [
@@ -157,7 +158,11 @@ export default function Services() {
                     WELIVITA WORKSHOP
                   </span>
                   <a
-                    href="#contact"
+                    href="/contact"
+                    onClick={(event) => {
+                      event.preventDefault();
+                      navigateTo('/contact');
+                    }}
                     className="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-charcoal hover:text-brand-copper uppercase tracking-wider group/link transition-colors"
                   >
                     Discuss project

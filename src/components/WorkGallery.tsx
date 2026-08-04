@@ -1,5 +1,6 @@
-import { motion } from 'motion/react';
-import { Images, Hammer, Maximize2 } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
+import { ChevronLeft, ChevronRight, Images, Hammer, Maximize2, X } from 'lucide-react';
 
 import work01 from '../assets/images/WhatsApp Image 2026-07-17 at 15.31.31.jpeg';
 import work02 from '../assets/images/WhatsApp Image 2026-07-17 at 15.31.34 (1).jpeg';
@@ -49,6 +50,41 @@ const workImages = [
 }));
 
 export default function WorkGallery() {
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const selectedImage = selectedIndex === null ? null : workImages[selectedIndex];
+
+  const showPrevious = () => {
+    setSelectedIndex((current) => {
+      if (current === null) return current;
+      return current === 0 ? workImages.length - 1 : current - 1;
+    });
+  };
+
+  const showNext = () => {
+    setSelectedIndex((current) => {
+      if (current === null) return current;
+      return current === workImages.length - 1 ? 0 : current + 1;
+    });
+  };
+
+  useEffect(() => {
+    if (selectedIndex === null) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setSelectedIndex(null);
+      if (event.key === 'ArrowLeft') showPrevious();
+      if (event.key === 'ArrowRight') showNext();
+    };
+
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [selectedIndex]);
+
   return (
     <section id="work-gallery" className="py-24 bg-brand-charcoal text-brand-cream">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -73,7 +109,6 @@ export default function WorkGallery() {
               <Hammer className="w-5 h-5 text-brand-amber" />
             </div>
             <div>
-              <p className="font-display text-2xl font-semibold text-brand-cream">{workImages.length}</p>
               <p className="font-mono text-[10px] uppercase tracking-widest">Work Photos</p>
             </div>
           </div>
@@ -83,12 +118,21 @@ export default function WorkGallery() {
           {workImages.map((image, index) => (
             <motion.figure
               key={image.id}
+              role="button"
+              tabIndex={0}
+              onClick={() => setSelectedIndex(index)}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault();
+                  setSelectedIndex(index);
+                }
+              }}
               initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.5, delay: Math.min(index * 0.025, 0.35) }}
               className={[
-                'group relative overflow-hidden rounded-lg border border-brand-cream/10 bg-brand-clay',
+                'group relative overflow-hidden rounded-lg border border-brand-cream/10 bg-brand-clay cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-brand-amber',
                 image.featured ? 'col-span-2 row-span-2' : '',
                 index === 8 || index === 19 ? 'md:col-span-2' : '',
               ].join(' ')}
@@ -119,6 +163,74 @@ export default function WorkGallery() {
           </p>
         </div>
       </div>
+
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            className="fixed inset-0 z-[80] bg-brand-charcoal/95 backdrop-blur-sm px-4 py-6 sm:p-8 flex items-center justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedIndex(null)}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Expanded project photo"
+          >
+            <button
+              type="button"
+              onClick={() => setSelectedIndex(null)}
+              className="absolute right-4 top-4 sm:right-6 sm:top-6 h-11 w-11 rounded-lg bg-brand-cream/10 hover:bg-brand-cream/20 text-brand-cream flex items-center justify-center transition-colors"
+              aria-label="Close photo preview"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <button
+              type="button"
+              onClick={(event) => {
+                event.stopPropagation();
+                showPrevious();
+              }}
+              className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 h-11 w-11 rounded-lg bg-brand-cream/10 hover:bg-brand-cream/20 text-brand-cream flex items-center justify-center transition-colors"
+              aria-label="Previous photo"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+
+            <motion.div
+              className="max-w-6xl w-full max-h-[86vh] flex flex-col items-center gap-4"
+              initial={{ opacity: 0, scale: 0.96, y: 16 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, y: 16 }}
+              transition={{ duration: 0.25 }}
+              onClick={(event) => event.stopPropagation()}
+            >
+              <img
+                src={selectedImage.src}
+                alt={selectedImage.alt}
+                className="max-h-[78vh] w-auto max-w-full rounded-lg object-contain shadow-2xl"
+              />
+              <div className="flex items-center gap-3 text-brand-cream/70">
+                <span className="font-mono text-[10px] uppercase tracking-widest">
+                  RTW Work Photo {selectedIndex + 1} / {workImages.length}
+                </span>
+              </div>
+            </motion.div>
+
+            <button
+              type="button"
+              onClick={(event) => {
+                event.stopPropagation();
+                showNext();
+              }}
+              className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 h-11 w-11 rounded-lg bg-brand-cream/10 hover:bg-brand-cream/20 text-brand-cream flex items-center justify-center transition-colors"
+              aria-label="Next photo"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

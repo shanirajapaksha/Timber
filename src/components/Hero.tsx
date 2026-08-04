@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, Award, ShieldCheck, CheckCircle2, Calendar } from 'lucide-react';
 import heroImgSrc from '../assets/images/hero_timber_works_1783420008237.jpg';
+import { navigateTo } from '../navigation';
 
 const Hero3DTimberScene = lazy(() => import('./Hero3DTimberScene'));
 
@@ -112,7 +113,11 @@ export default function Hero() {
               className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center"
             >
               <a
-                href="#services"
+                href="/services"
+                onClick={(event) => {
+                  event.preventDefault();
+                  navigateTo('/services');
+                }}
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-charcoal text-brand-cream font-medium text-sm tracking-wider uppercase rounded-lg hover:bg-brand-copper transition-all duration-300 shadow-lg shadow-brand-charcoal/10 hover:shadow-brand-copper/20"
                 id="hero-btn-explore"
               >
@@ -120,7 +125,11 @@ export default function Hero() {
                 <ArrowRight className="w-4 h-4" />
               </a>
               <a
-                href="#contact"
+                href="/contact"
+                onClick={(event) => {
+                  event.preventDefault();
+                  navigateTo('/contact');
+                }}
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-brand-charcoal/20 text-brand-charcoal font-medium text-sm tracking-wider uppercase rounded-lg hover:bg-brand-charcoal hover:text-brand-cream transition-all duration-300"
                 id="hero-btn-quote"
               >

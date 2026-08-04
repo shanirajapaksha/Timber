@@ -1,10 +1,12 @@
 import { useState, useEffect, type MouseEvent } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Layers, Menu, X, ArrowUpRight } from 'lucide-react';
+import { navigateTo } from '../navigation';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [pathname, setPathname] = useState(window.location.pathname);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,28 +22,30 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: 'About', href: '#about' },
-    { name: 'Services', href: '#services' },
-    { name: 'Why RTW', href: '#why-rtw' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Quality & Specs', href: '#quality' },
-    { name: 'Process', href: '#process' },
+    { name: 'About', href: '/about' },
+    { name: 'Services', href: '/services' },
+    { name: 'Why RTW', href: '/why-rtw' },
+    { name: 'Projects', href: '/projects' },
+    { name: 'Quality & Specs', href: '/quality' },
+    { name: 'Process', href: '/process' },
   ];
 
-  const removeUrlHash = () => {
-    window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
-  };
+  useEffect(() => {
+    const handleRouteChange = () => setPathname(window.location.pathname);
+
+    window.addEventListener('popstate', handleRouteChange);
+    window.addEventListener('app:navigate', handleRouteChange);
+
+    return () => {
+      window.removeEventListener('popstate', handleRouteChange);
+      window.removeEventListener('app:navigate', handleRouteChange);
+    };
+  }, []);
 
   const handleNavClick = (event: MouseEvent<HTMLAnchorElement>, href: string, closeMobileMenu = false) => {
     event.preventDefault();
 
-    if (href === '#') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      document.getElementById(href.replace('#', ''))?.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    removeUrlHash();
+    navigateTo(href);
 
     if (closeMobileMenu) {
       setIsMobileMenuOpen(false);
@@ -60,7 +64,7 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
           {/* Logo */}
-          <a href="#" onClick={(event) => handleNavClick(event, '#')} className="flex items-center gap-3 group" id="nav-logo">
+          <a href="/" onClick={(event) => handleNavClick(event, '/')} className="flex items-center gap-3 group" id="nav-logo">
             <div className="w-10 h-10 rounded-lg bg-brand-charcoal flex items-center justify-center text-brand-amber transition-transform duration-300 group-hover:scale-105">
               <Layers className="w-5 h-5" />
             </div>
@@ -82,7 +86,9 @@ export default function Navbar() {
                   <a
                     href={link.href}
                     onClick={(event) => handleNavClick(event, link.href)}
-                    className="relative text-sm font-medium text-brand-charcoal/80 hover:text-brand-charcoal transition-colors duration-200 py-2"
+                    className={`relative text-sm font-medium hover:text-brand-charcoal transition-colors duration-200 py-2 ${
+                      pathname === link.href ? 'text-brand-copper' : 'text-brand-charcoal/80'
+                    }`}
                   >
                     {link.name}
                   </a>
@@ -91,8 +97,8 @@ export default function Navbar() {
             </ul>
 
             <a
-              href="#contact"
-              onClick={(event) => handleNavClick(event, '#contact')}
+              href="/contact"
+              onClick={(event) => handleNavClick(event, '/contact')}
               className="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-charcoal hover:bg-brand-copper text-brand-cream font-medium text-xs tracking-wider uppercase rounded-full transition-all duration-300"
               id="nav-cta"
             >
@@ -104,8 +110,8 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <div className="lg:hidden flex items-center gap-2 min-[360px]:gap-4">
             <a
-              href="#contact"
-              onClick={(event) => handleNavClick(event, '#contact')}
+              href="/contact"
+              onClick={(event) => handleNavClick(event, '/contact')}
               className="hidden min-[360px]:inline-flex px-4 py-2 bg-brand-charcoal text-brand-cream text-xs uppercase tracking-wider font-semibold rounded-full hover:bg-brand-copper transition-colors"
             >
               Quote
@@ -179,8 +185,8 @@ export default function Navbar() {
 
               <div>
                 <a
-                  href="#contact"
-                  onClick={(event) => handleNavClick(event, '#contact', true)}
+                  href="/contact"
+                  onClick={(event) => handleNavClick(event, '/contact', true)}
                   className="w-full text-center block py-4 bg-brand-charcoal hover:bg-brand-copper text-brand-cream uppercase font-bold tracking-wider text-xs rounded-lg transition-colors"
                 >
                   Request a Quote

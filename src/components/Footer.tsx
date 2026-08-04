@@ -1,18 +1,19 @@
 import { Layers, ArrowUp, Mail, Phone, MapPin } from 'lucide-react';
+import { navigateTo } from '../navigation';
 
 export default function Footer() {
   const handleScrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    navigateTo('/');
   };
 
   const navLinks = [
-    { name: 'About RTW', href: '#about' },
-    { name: 'Services', href: '#services' },
-    { name: 'Why Us', href: '#why-rtw' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Credentials', href: '#quality' },
-    { name: 'Specifications', href: '#quality' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'About RTW', href: '/about' },
+    { name: 'Services', href: '/services' },
+    { name: 'Why Us', href: '/why-rtw' },
+    { name: 'Projects', href: '/projects' },
+    { name: 'Credentials', href: '/quality' },
+    { name: 'Specifications', href: '/quality' },
+    { name: 'Contact', href: '/contact' },
   ];
 
   return (
@@ -23,7 +24,15 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 pb-16 border-b border-brand-cream/10">
           {/* Logo & Intro */}
           <div className="lg:col-span-4 space-y-6">
-            <a href="#" className="flex items-center gap-3 group" id="footer-logo">
+            <a
+              href="/"
+              onClick={(event) => {
+                event.preventDefault();
+                navigateTo('/');
+              }}
+              className="flex items-center gap-3 group"
+              id="footer-logo"
+            >
               <div className="w-10 h-10 rounded-lg bg-brand-cream flex items-center justify-center text-brand-clay transition-transform duration-300 group-hover:scale-105">
                 <Layers className="w-5 h-5" />
               </div>
@@ -58,6 +67,10 @@ export default function Footer() {
                 <li key={link.name}>
                   <a
                     href={link.href}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      navigateTo(link.href);
+                    }}
                     className="hover:text-brand-amber transition-colors duration-200"
                   >
                     {link.name}
