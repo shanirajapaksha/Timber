@@ -88,7 +88,7 @@ export default function Footer() {
             <div className="space-y-3 text-xs sm:text-sm text-brand-cream/70 font-light">
               <p className="flex justify-between border-b border-brand-cream/5 pb-2">
                 <span>Monday – Friday</span>
-                <span className="text-brand-cream font-medium">8:00 AM – 5:00 PM</span>
+                <span className="text-brand-cream font-medium">8:00 AM – 6:00 PM</span>
               </p>
               <p className="flex justify-between border-b border-brand-cream/5 pb-2">
                 <span>Saturday</span>

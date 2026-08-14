@@ -6,7 +6,7 @@ export default function Specs() {
     {
       icon: <Layers className="w-4 h-4 text-brand-copper" />,
       label: 'Frame Timber Type',
-      val: 'Mahogany (Tested Sample Documentation)',
+      val: 'Mahogany & Teak (Tested Sample Documentation)',
     },
     {
       icon: <Ruler className="w-4 h-4 text-brand-copper" />,
@@ -42,11 +42,6 @@ export default function Specs() {
       icon: <Ruler className="w-4 h-4 text-brand-copper" />,
       label: 'Timber Moisture Level',
       val: '10% – 15% (Kiln-Dried Quality)',
-    },
-    {
-      icon: <Landmark className="w-4 h-4 text-brand-copper" />,
-      label: 'Treatment Partners',
-      val: 'Wood Moon Enterprises or Southern Wood Fashion Pvt Ltd',
     },
   ];
 
@@ -91,7 +86,7 @@ export default function Specs() {
           {/* Header Banner */}
           <div className="px-6 py-4 bg-brand-cream/[0.04] border-b border-brand-cream/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
             <span className="font-mono text-[10px] tracking-widest text-brand-amber font-bold uppercase">
-              MAHOGANY PRODUCTS SCHEDULING SPEC SHEET
+              MAHOGANY & TEAK PRODUCTS SCHEDULING SPEC SHEET
             </span>
             <span className="font-mono text-[9px] text-brand-cream/40">
               ID: RTW-TS-2026-V1

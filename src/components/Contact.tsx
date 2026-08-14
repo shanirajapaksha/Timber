@@ -159,10 +159,10 @@ export default function Contact() {
                     CALL / WHATSAPP DESK
                   </h4>
                   <p className="text-sm text-brand-charcoal font-bold leading-none mb-1">
-                    +94 11 254 8790
+                    +94 77 256 16 47
                   </p>
                   <p className="text-xs text-brand-muted font-light">
-                    +94 77 348 2911 (Estimations Hotkey)
+                    +94 71 44 26 510 (Estimations Hotkey)
                   </p>
                 </div>
               </div>
@@ -177,10 +177,7 @@ export default function Contact() {
                     EMAIL CORRESPONDENCE
                   </h4>
                   <p className="text-sm text-brand-charcoal font-medium">
-                    info@rupasinghetimber.com
-                  </p>
-                  <p className="text-xs text-brand-muted font-light mt-0.5">
-                    sales@rupasinghetimber.com
+                    rupasinghetimberworks@gmail.com
                   </p>
                 </div>
               </div>
