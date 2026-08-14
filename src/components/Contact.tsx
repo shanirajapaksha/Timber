@@ -20,7 +20,7 @@ export default function Contact() {
   const [submitError, setSubmitError] = useState('');
 
   const projectOptions = [
-    { value: 'residential', label: 'Residential Custom Doors & Frames' },
+    { value: 'residential', label: 'Doors & Frames' },
     { value: 'commercial', label: 'Commercial Timber Supply' },
     { value: 'joinery', label: 'Bespoke Joinery (Kitchens/Wardrobes)' },
     { value: 'gov', label: 'Government / Contractor Supply' },
