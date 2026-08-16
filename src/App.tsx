@@ -44,12 +44,9 @@ export default function App() {
       case '/why-rtw':
         return <WhyChooseUs />;
       case '/projects':
-        return (
-          <>
-            <WorkGallery />
-            <Projects />
-          </>
-        );
+        return <Projects />;
+      case '/gallery':
+        return <WorkGallery />;
       case '/quality':
         return (
           <>

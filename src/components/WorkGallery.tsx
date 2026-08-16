@@ -86,18 +86,18 @@ export default function WorkGallery() {
   }, [selectedIndex]);
 
   return (
-    <section id="work-gallery" className="py-24 bg-brand-charcoal text-brand-cream">
+    <section id="gallery" className="py-24 bg-brand-charcoal text-brand-cream">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 mb-4">
               <span className="h-[1px] w-6 bg-brand-amber" />
               <span className="font-mono text-xs uppercase tracking-widest text-brand-amber font-semibold">
-                COMPLETED WORK
+                PROJECT GALLERY
               </span>
             </div>
             <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight mb-4">
-              Recent Timber Work from Our Workshop and Sites
+              Our Project Gallery
             </h2>
             <p className="text-sm sm:text-base text-brand-cream/65 leading-relaxed font-light">
               A closer look at completed doors, joinery, frames, and timber finishes handled by the RTW team.

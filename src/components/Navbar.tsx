@@ -26,6 +26,7 @@ export default function Navbar() {
     { name: 'Services', href: '/services' },
     { name: 'Why RTW', href: '/why-rtw' },
     { name: 'Projects', href: '/projects' },
+    { name: 'Gallery', href: '/gallery' },
     { name: 'Quality & Specs', href: '/quality' },
     { name: 'Process', href: '/process' },
   ];
@@ -79,8 +80,8 @@ export default function Navbar() {
           </a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8" id="nav-desktop-menu">
-            <ul className="flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-6" id="nav-desktop-menu">
+            <ul className="flex items-center gap-6">
               {navLinks.map((link) => (
                 <li key={link.name}>
                   <a
