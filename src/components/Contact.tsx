@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { MapPin, Phone, Mail, CheckCircle2, Send, MessageSquare } from 'lucide-react';
+import { MapPin, Phone, Mail, CheckCircle2, Send, MessageSquare, ExternalLink } from 'lucide-react';
 
 const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
 const WEB3FORMS_ACCESS_KEY = 'ae08340d-739d-465c-b4a9-5165b9b37613';
+const WHATSAPP_URL = 'https://wa.me/qr/3ADHHUHPDYNTF1';
+const CONTACT_EMAIL = 'rupasinghetimberworks@gmail.com';
+const MAPS_URL = 'https://www.google.com/maps/search/?api=1&query=236%2C%20Hemawatha%2C%20Welivita%2C%20Kaduwela%2C%20Sri%20Lanka';
+const MAPS_EMBED_URL = 'https://www.google.com/maps?q=236%2C%20Hemawatha%2C%20Welivita%2C%20Kaduwela%2C%20Sri%20Lanka&output=embed';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -135,19 +139,27 @@ export default function Contact() {
 
             <div className="space-y-6">
               {/* Address Card */}
-              <div className="flex gap-4 p-5 bg-brand-cream border border-brand-charcoal/5 rounded-2xl">
+              <a
+                href={MAPS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex gap-4 p-5 bg-brand-cream border border-brand-charcoal/5 rounded-2xl transition-all hover:border-brand-amber/40 hover:shadow-md group"
+              >
                 <div className="w-10 h-10 rounded-xl bg-brand-charcoal flex items-center justify-center text-brand-amber flex-shrink-0">
                   <MapPin className="w-5 h-5" />
                 </div>
-                <div>
+                <div className="flex-1">
                   <h4 className="font-display font-semibold text-xs uppercase tracking-wider text-brand-muted mb-1 font-mono">
                     OUR OFFICE & WORKSHOP
                   </h4>
                   <p className="text-sm text-brand-charcoal font-medium leading-relaxed">
                     236, Hemawatha, Welivita,<br />Kaduwela, Sri Lanka
                   </p>
+                  <span className="mt-2 inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider text-brand-copper">
+                    Open in Google Maps <ExternalLink className="h-3 w-3" />
+                  </span>
                 </div>
-              </div>
+              </a>
 
               {/* Call/WhatsApp Card */}
               <div className="flex gap-4 p-5 bg-brand-cream border border-brand-charcoal/5 rounded-2xl">
@@ -158,17 +170,28 @@ export default function Contact() {
                   <h4 className="font-display font-semibold text-xs uppercase tracking-wider text-brand-muted mb-1 font-mono">
                     CALL / WHATSAPP DESK
                   </h4>
-                  <p className="text-sm text-brand-charcoal font-bold leading-none mb-1">
+                  <a href="tel:+94772561647" className="block text-sm text-brand-charcoal font-bold leading-none mb-1 hover:text-brand-copper transition-colors">
                     +94 77 256 16 47
-                  </p>
-                  <p className="text-xs text-brand-muted font-light">
+                  </a>
+                  <a href="tel:+94714426510" className="block text-xs text-brand-muted font-light hover:text-brand-copper transition-colors">
                     +94 71 44 26 510 (Estimations Hotkey)
-                  </p>
+                  </a>
+                  <a
+                    href={WHATSAPP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-[#25D366]/10 px-3 py-1.5 text-[10px] font-mono font-semibold uppercase tracking-wider text-[#168a3f] transition-colors hover:bg-[#25D366]/20"
+                  >
+                    Open WhatsApp <ExternalLink className="h-3 w-3" />
+                  </a>
                 </div>
               </div>
 
               {/* Email Card */}
-              <div className="flex gap-4 p-5 bg-brand-cream border border-brand-charcoal/5 rounded-2xl">
+              <a
+                href={`mailto:${CONTACT_EMAIL}`}
+                className="flex gap-4 p-5 bg-brand-cream border border-brand-charcoal/5 rounded-2xl transition-all hover:border-brand-amber/40 hover:shadow-md group"
+              >
                 <div className="w-10 h-10 rounded-xl bg-brand-charcoal flex items-center justify-center text-brand-amber flex-shrink-0">
                   <Mail className="w-5 h-5" />
                 </div>
@@ -176,11 +199,11 @@ export default function Contact() {
                   <h4 className="font-display font-semibold text-xs uppercase tracking-wider text-brand-muted mb-1 font-mono">
                     EMAIL CORRESPONDENCE
                   </h4>
-                  <p className="text-sm text-brand-charcoal font-medium">
-                    rupasinghetimberworks@gmail.com
+                  <p className="text-sm text-brand-charcoal font-medium break-all group-hover:text-brand-copper transition-colors">
+                    {CONTACT_EMAIL}
                   </p>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
 
@@ -377,6 +400,42 @@ export default function Contact() {
             </div>
           </div>
 
+        </div>
+
+        <div className="mt-16 overflow-hidden rounded-2xl border border-brand-charcoal/10 bg-brand-cream shadow-lg" id="workshop-location">
+          <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr]">
+            <div className="flex flex-col justify-center p-8 md:p-10">
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-brand-charcoal text-brand-amber">
+                <MapPin className="h-6 w-6" />
+              </div>
+              <span className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-brand-copper">
+                Find Our Workshop
+              </span>
+              <h3 className="mb-4 font-display text-2xl font-bold text-brand-charcoal">
+                Visit Rupasinghe Timber Works
+              </h3>
+              <p className="mb-6 text-sm leading-relaxed text-brand-muted">
+                236, Hemawatha, Welivita, Kaduwela, Sri Lanka
+              </p>
+              <a
+                href={MAPS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex w-fit items-center gap-2 rounded-full bg-brand-charcoal px-5 py-3 text-xs font-semibold uppercase tracking-wider text-brand-cream transition-colors hover:bg-brand-copper"
+              >
+                Get Directions <ExternalLink className="h-3.5 w-3.5" />
+              </a>
+            </div>
+
+            <iframe
+              src={MAPS_EMBED_URL}
+              title="Rupasinghe Timber Works location map"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="min-h-[360px] w-full border-0"
+              allowFullScreen
+            />
+          </div>
         </div>
       </div>
     </section>
