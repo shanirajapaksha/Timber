@@ -6,8 +6,8 @@ const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
 const WEB3FORMS_ACCESS_KEY = 'ae08340d-739d-465c-b4a9-5165b9b37613';
 const WHATSAPP_URL = 'https://wa.me/qr/3ADHHUHPDYNTF1';
 const CONTACT_EMAIL = 'rupasinghetimberworks@gmail.com';
-const MAPS_URL = 'https://www.google.com/maps/search/?api=1&query=236%2C%20Hemawatha%2C%20Welivita%2C%20Kaduwela%2C%20Sri%20Lanka';
-const MAPS_EMBED_URL = 'https://www.google.com/maps?q=236%2C%20Hemawatha%2C%20Welivita%2C%20Kaduwela%2C%20Sri%20Lanka&output=embed';
+const MAPS_URL = 'https://www.google.com/maps/search/Rupasinghe%20Timber%20Works/@6.92897339,79.96537472,17z?hl=en';
+const MAPS_EMBED_URL = 'https://www.google.com/maps?q=6.92897339%2C79.96537472&z=17&output=embed';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
