@@ -129,9 +129,9 @@ export default function Contact() {
               </span>
             </div>
             
-            <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-brand-charcoal mb-6 leading-tight">
+            <h1 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-brand-charcoal mb-6 leading-tight">
               Start Your Next Timber Project with RTW
-            </h2>
+            </h1>
             
             <p className="text-sm sm:text-base text-brand-muted leading-relaxed mb-10 font-light">
               Connect with our estimating desk today to discuss timber supply schedules, custom pricing, site delivery slots, or bespoke manufacturing requirements.

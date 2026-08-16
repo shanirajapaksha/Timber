@@ -64,7 +64,7 @@ export default function WhyChooseUs() {
             </span>
           </motion.div>
           
-          <motion.h2
+          <motion.h1
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
@@ -72,7 +72,7 @@ export default function WhyChooseUs() {
             className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-brand-cream mb-4"
           >
             Reliability Engineered Into Every Plank
-          </motion.h2>
+          </motion.h1>
           
           <motion.p
             initial={{ opacity: 0, y: 15 }}

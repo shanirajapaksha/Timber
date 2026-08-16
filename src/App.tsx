@@ -14,6 +14,46 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 const WHATSAPP_URL = 'https://wa.me/qr/3ADHHUHPDYNTF1';
+const SITE_URL = 'https://rupasinghetimber.com';
+
+const PAGE_SEO: Record<string, { title: string; description: string }> = {
+  '/': {
+    title: 'Rupasinghe Timber Works | Timber Supplier & Manufacturer Sri Lanka',
+    description: 'Premium timber doors, frames, sashes, joinery and custom manufacturing for homes, contractors and architects across Sri Lanka from our Kaduwela workshop.',
+  },
+  '/about': {
+    title: 'About Rupasinghe Timber Works | Kaduwela, Sri Lanka',
+    description: 'Learn about Rupasinghe Timber Works, our timber craftsmanship, trusted industry partnerships and manufacturing experience in Kaduwela since 2010.',
+  },
+  '/services': {
+    title: 'Timber Products & Joinery Services | Rupasinghe Timber Works',
+    description: 'Explore custom timber doors, frames, sashes, architectural joinery, commercial timber supply and precision millwork services in Sri Lanka.',
+  },
+  '/why-rtw': {
+    title: 'Why Choose RTW | Quality Timber Manufacturing Sri Lanka',
+    description: 'Choose Rupasinghe Timber Works for dependable supply, documented timber quality, skilled craftsmanship and precise manufacturing for Sri Lankan projects.',
+  },
+  '/projects': {
+    title: 'Timber Projects in Sri Lanka | Rupasinghe Timber Works',
+    description: 'View landmark residential, hospitality, healthcare and commercial timber projects completed by Rupasinghe Timber Works across Sri Lanka.',
+  },
+  '/gallery': {
+    title: 'Timber Work Gallery | Doors, Frames & Joinery by RTW',
+    description: 'Browse real project photographs of timber doors, frames, joinery, workshop production and completed installations by Rupasinghe Timber Works.',
+  },
+  '/quality': {
+    title: 'Timber Quality & Specifications | Rupasinghe Timber Works',
+    description: 'Review the timber quality controls, material specifications, moisture standards and manufacturing details used by Rupasinghe Timber Works.',
+  },
+  '/process': {
+    title: 'Our Timber Manufacturing Process | Rupasinghe Timber Works',
+    description: 'See how Rupasinghe Timber Works manages timber selection, preparation, precision manufacturing, quality checks and project delivery.',
+  },
+  '/contact': {
+    title: 'Contact Rupasinghe Timber Works | Kaduwela Workshop',
+    description: 'Contact Rupasinghe Timber Works in Welivita, Kaduwela for timber supply, custom joinery, project quotations, workshop directions and WhatsApp enquiries.',
+  },
+};
 
 export default function App() {
   const [pathname, setPathname] = useState(window.location.pathname);
@@ -29,6 +69,26 @@ export default function App() {
       window.removeEventListener('app:navigate', handleRouteChange);
     };
   }, []);
+
+  useEffect(() => {
+    const seo = PAGE_SEO[pathname] ?? PAGE_SEO['/'];
+    const isKnownPage = Boolean(PAGE_SEO[pathname]);
+    const canonicalUrl = `${SITE_URL}${isKnownPage && pathname !== '/' ? pathname : '/'}`;
+
+    const setMetaContent = (selector: string, content: string) => {
+      document.querySelector<HTMLMetaElement>(selector)?.setAttribute('content', content);
+    };
+
+    document.title = seo.title;
+    document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.setAttribute('href', canonicalUrl);
+    setMetaContent('meta[name="description"]', seo.description);
+    setMetaContent('meta[name="robots"]', isKnownPage ? 'index, follow' : 'noindex, follow');
+    setMetaContent('meta[property="og:title"]', seo.title);
+    setMetaContent('meta[property="og:description"]', seo.description);
+    setMetaContent('meta[property="og:url"]', canonicalUrl);
+    setMetaContent('meta[name="twitter:title"]', seo.title);
+    setMetaContent('meta[name="twitter:description"]', seo.description);
+  }, [pathname]);
 
   const page = useMemo(() => {
     switch (pathname) {

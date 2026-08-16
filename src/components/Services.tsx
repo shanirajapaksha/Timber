@@ -64,7 +64,7 @@ export default function Services() {
             <span className="h-[1px] w-6 bg-brand-copper" />
           </motion.div>
           
-          <motion.h2
+          <motion.h1
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
@@ -72,7 +72,7 @@ export default function Services() {
             className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-brand-charcoal mb-4"
           >
             Precision Millwork & Sourcing
-          </motion.h2>
+          </motion.h1>
           
           <motion.p
             initial={{ opacity: 0, y: 15 }}

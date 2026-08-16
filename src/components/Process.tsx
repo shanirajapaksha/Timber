@@ -62,9 +62,9 @@ export default function Process() {
             </span>
           </div>
           
-          <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-brand-charcoal mb-4">
+          <h1 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-brand-charcoal mb-4">
             How We Execute Excellence
-          </h2>
+          </h1>
           
           <p className="text-xs sm:text-sm text-brand-muted leading-relaxed font-light">
             An overview of the complete, quality-controlled lifecycle that our timber passes through from raw woodland selection to on-site assembly.

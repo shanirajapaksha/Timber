@@ -72,10 +72,10 @@ export default function About() {
                   OUR LEGACY
                 </span>
               </div>
-              <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-brand-charcoal mb-6 leading-tight">
+              <h1 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-brand-charcoal mb-6 leading-tight">
                 Built on Trust, Quality, <br />
                 and Craftsmanship
-              </h2>
+              </h1>
               <div className="space-y-6 text-brand-muted text-sm sm:text-base leading-relaxed">
                 <p>
                   Established in <strong className="text-brand-charcoal font-semibold">2010</strong>, Rupasinghe Timber Works (RTW) has steadily grown from a local supplier into a trusted cornerstone of the Sri Lankan timber industry. Operating out of <strong className="text-brand-charcoal font-semibold">Welivita, Kaduwela</strong>, we specialize in sourcing, processing, and manufacturing premium timber materials.

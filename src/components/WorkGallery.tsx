@@ -96,9 +96,9 @@ export default function WorkGallery() {
                 PROJECT GALLERY
               </span>
             </div>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight mb-4">
+            <h1 className="font-display text-3xl sm:text-4xl font-bold tracking-tight mb-4">
               Our Project Gallery
-            </h2>
+            </h1>
             <p className="text-sm sm:text-base text-brand-cream/65 leading-relaxed font-light">
               A closer look at completed doors, joinery, frames, and timber finishes handled by the RTW team.
             </p>

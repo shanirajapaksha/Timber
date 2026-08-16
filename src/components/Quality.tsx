@@ -46,9 +46,9 @@ export default function Quality() {
               </span>
             </div>
             
-            <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-brand-charcoal mb-6 leading-tight">
+            <h1 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-brand-charcoal mb-6 leading-tight">
               Backed by Rigorous Scientific Testing
-            </h2>
+            </h1>
             
             <p className="text-sm sm:text-base text-brand-muted leading-relaxed mb-6 font-normal">
               At Rupasinghe Timber Works, we don’t expect you to take our word for our timber’s quality. We hold actual technical documentation validating the structural integrity, load performance, and physical parameters of our materials.

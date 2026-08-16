@@ -72,9 +72,9 @@ export default function Projects() {
                 LANDMARK CONTRACTS
               </span>
             </div>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-brand-charcoal mb-4">
+            <h1 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-brand-charcoal mb-4">
               Trusted for Sri Lanka’s Flagship Developments
-            </h2>
+            </h1>
           </div>
           <p className="text-xs sm:text-sm text-brand-muted max-w-sm mt-4 md:mt-0 leading-relaxed font-light">
             From high-volume commercial door installations to bespoke luxury resort joinery, RTW consistently fulfills critical timelines and exacting engineering standards.
