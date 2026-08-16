@@ -1,14 +1,13 @@
 import { motion } from 'motion/react';
-import { Building2, Globe2, ShieldAlert, Award, Star, Hammer } from 'lucide-react';
 
 export default function Clients() {
   const clients = [
-    { name: 'Tudawe Brothers', icon: <Building2 className="w-5 h-5" />, subtitle: 'Pioneer Construction' },
-    { name: 'China Railway 25th Bureau', icon: <Globe2 className="w-5 h-5" />, subtitle: 'Global Engineering' },
-    { name: 'Tudawe Engineering Services', icon: <Award className="w-5 h-5" />, subtitle: 'Infrastructure Specialist' },
-    { name: 'UNI-EFF', icon: <Star className="w-5 h-5" />, subtitle: 'Property Development' },
-    { name: 'Durdans Hospital', icon: <ShieldAlert className="w-5 h-5" />, subtitle: 'Healthcare Leader' },
-    { name: 'Cinnamon Life City of Dreams', icon: <Hammer className="w-5 h-5" />, subtitle: 'Elite Leisure Development' },
+    { name: 'Tudawe Brothers', logo: '/client-logos/tudawe-brothers.png', subtitle: 'Pioneer Construction', logoClass: 'max-h-10' },
+    { name: 'China Railway 25th Bureau', logo: '/client-logos/china-railway-25th-bureau.svg', subtitle: 'Global Engineering', logoClass: 'max-h-14' },
+    { name: 'Tudawe Engineering Services', logo: '/client-logos/tudawe-engineering.png', subtitle: 'Infrastructure Specialist', logoClass: 'max-h-14' },
+    { name: 'UNI-EFF', logo: '/client-logos/uni-eff.svg', subtitle: 'Property Development', logoClass: 'max-h-12' },
+    { name: 'Durdans Hospital', logo: '/client-logos/durdans-hospital.jpg', subtitle: 'Healthcare Leader', logoClass: 'max-h-14' },
+    { name: 'Cinnamon Life City of Dreams', logo: '/client-logos/cinnamon-life.png', subtitle: 'Elite Leisure Development', logoClass: 'max-h-16' },
   ];
 
   return (
@@ -21,19 +20,22 @@ export default function Clients() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 items-center" id="client-logos-grid">
           {clients.map((client, idx) => (
             <motion.div
-              key={idx}
+              key={client.name}
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.05 }}
-              className="flex flex-col items-center justify-center p-6 bg-brand-cream border border-brand-charcoal/5 hover:border-brand-amber/30 rounded-xl transition-all duration-300 hover:shadow-md group cursor-pointer"
+              className="flex min-h-48 flex-col items-center justify-center p-5 bg-brand-cream border border-brand-charcoal/5 hover:border-brand-amber/30 rounded-xl transition-all duration-300 hover:shadow-md group"
             >
-              {/* Monochromatic icon emblem */}
-              <div className="w-10 h-10 rounded-full bg-brand-charcoal/5 flex items-center justify-center text-brand-muted group-hover:bg-brand-charcoal group-hover:text-brand-amber transition-colors duration-300 mb-3">
-                {client.icon}
+              <div className="h-16 w-full flex items-center justify-center mb-4">
+                <img
+                  src={client.logo}
+                  alt={`${client.name} logo`}
+                  loading="lazy"
+                  className={`max-w-full w-auto object-contain grayscale opacity-70 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 ${client.logoClass}`}
+                />
               </div>
 
-              {/* Client Text Branding */}
               <span className="font-display font-bold text-xs tracking-tight text-brand-charcoal text-center block">
                 {client.name}
               </span>
