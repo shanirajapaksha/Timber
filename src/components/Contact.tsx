@@ -3,8 +3,9 @@ import { motion, AnimatePresence } from 'motion/react';
 import { MapPin, Phone, Mail, CheckCircle2, Send, MessageSquare, ExternalLink } from 'lucide-react';
 
 const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
-const WEB3FORMS_ACCESS_KEY = 'ae08340d-739d-465c-b4a9-5165b9b37613';
-const WHATSAPP_URL = 'https://wa.me/qr/3ADHHUHPDYNTF1';
+const WEB3FORMS_ACCESS_KEY = '88fce037-6b96-4ecb-b2ac-8a82b35463e2';
+const WHATSAPP_NUMBER = '94772561647';
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
 const CONTACT_EMAIL = 'rupasinghetimberworks@gmail.com';
 const MAPS_URL = 'https://www.google.com/maps/search/Rupasinghe%20Timber%20Works/@6.92897339,79.96537472,17z?hl=en';
 const MAPS_EMBED_URL = 'https://www.google.com/maps?q=6.92897339%2C79.96537472&z=17&output=embed';
@@ -22,6 +23,7 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const [whatsAppMessageUrl, setWhatsAppMessageUrl] = useState(WHATSAPP_URL);
 
   const projectOptions = [
     { value: 'residential', label: 'Doors & Frames' },
@@ -71,9 +73,27 @@ export default function Contact() {
       return;
     }
 
+    const whatsAppTab = window.open('', '_blank');
+    if (whatsAppTab) {
+      whatsAppTab.document.title = 'Preparing WhatsApp message...';
+      whatsAppTab.document.body.textContent = 'Preparing your WhatsApp message...';
+    }
+
     setIsSubmitting(true);
     try {
       const selectedProjectType = projectOptions.find((option) => option.value === formData.projectType)?.label;
+      const whatsAppMessage = [
+        'Hello Rupasinghe Timber Works,',
+        '',
+        'I just submitted a quotation request through your website.',
+        `Name: ${formData.name}`,
+        `Phone: ${formData.phone}`,
+        `Email: ${formData.email}`,
+        `Project type: ${selectedProjectType ?? 'Timber Project'}`,
+        `Details: ${formData.message}`,
+      ].join('\n');
+      const nextWhatsAppMessageUrl = `${WHATSAPP_URL}?text=${encodeURIComponent(whatsAppMessage)}`;
+
       const response = await fetch(WEB3FORMS_ENDPOINT, {
         method: 'POST',
         headers: {
@@ -98,6 +118,7 @@ export default function Contact() {
         throw new Error(`Form endpoint responded with ${response.status}`);
       }
 
+      setWhatsAppMessageUrl(nextWhatsAppMessageUrl);
       setIsSuccess(true);
       setFormData({
         name: '',
@@ -106,7 +127,15 @@ export default function Contact() {
         projectType: '',
         message: '',
       });
+
+      // Opening the tab during the original click avoids async popup blockers.
+      // WhatsApp still requires the visitor to confirm the final send action.
+      if (whatsAppTab) {
+        whatsAppTab.opener = null;
+        whatsAppTab.location.replace(nextWhatsAppMessageUrl);
+      }
     } catch {
+      whatsAppTab?.close();
       setSubmitError('We could not send your request right now. Please try again or contact us directly.');
     } finally {
       setIsSubmitting(false);
@@ -241,6 +270,8 @@ export default function Contact() {
                         name="name"
                         value={formData.name}
                         onChange={handleInputChange}
+                        autoComplete="name"
+                        required
                         className={`w-full px-4 py-3.5 bg-brand-cream border rounded-lg focus:outline-hidden focus:ring-1 transition-colors ${
                           errors.name
                             ? 'border-red-500 focus:ring-red-500/30'
@@ -263,6 +294,8 @@ export default function Contact() {
                           name="email"
                           value={formData.email}
                           onChange={handleInputChange}
+                          autoComplete="email"
+                          required
                           className={`w-full px-4 py-3.5 bg-brand-cream border rounded-lg focus:outline-hidden focus:ring-1 transition-colors ${
                             errors.email
                               ? 'border-red-500 focus:ring-red-500/30'
@@ -278,11 +311,13 @@ export default function Contact() {
                           Phone / WhatsApp
                         </label>
                         <input
-                          type="text"
+                          type="tel"
                           id="phone"
                           name="phone"
                           value={formData.phone}
                           onChange={handleInputChange}
+                          autoComplete="tel"
+                          required
                           className={`w-full px-4 py-3.5 bg-brand-cream border rounded-lg focus:outline-hidden focus:ring-1 transition-colors ${
                             errors.phone
                               ? 'border-red-500 focus:ring-red-500/30'
@@ -304,6 +339,7 @@ export default function Contact() {
                         name="projectType"
                         value={formData.projectType}
                         onChange={handleInputChange}
+                        required
                         className={`w-full px-4 py-3.5 bg-brand-cream border rounded-lg focus:outline-hidden focus:ring-1 transition-colors ${
                           errors.projectType
                             ? 'border-red-500 focus:ring-red-500/30'
@@ -333,6 +369,7 @@ export default function Contact() {
                         value={formData.message}
                         onChange={handleInputChange}
                         rows={4}
+                        required
                         className={`w-full px-4 py-3.5 bg-brand-cream border rounded-lg focus:outline-hidden focus:ring-1 transition-colors resize-none ${
                           errors.message
                             ? 'border-red-500 focus:ring-red-500/30'
@@ -385,15 +422,26 @@ export default function Contact() {
                     </h4>
                     
                     <p className="text-sm text-brand-muted max-w-md mx-auto leading-relaxed mb-8">
-                      Thank you for contacting Rupasinghe Timber Works. A timber valuation engineer is reviewing your specs. We will follow up via phone/WhatsApp or email shortly.
+                      Your request was emailed successfully. WhatsApp should now open with the same details—please tap Send there to complete the WhatsApp message.
                     </p>
 
-                    <button
-                      onClick={() => setIsSuccess(false)}
-                      className="px-6 py-2.5 bg-brand-charcoal/5 hover:bg-brand-charcoal/10 text-brand-charcoal text-xs font-semibold uppercase tracking-wider rounded-md transition-colors cursor-pointer"
-                    >
-                      Submit Another Spec
-                    </button>
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                      <a
+                        href={whatsAppMessageUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 rounded-md bg-[#25D366] px-6 py-2.5 text-xs font-semibold uppercase tracking-wider text-white transition-colors hover:bg-[#20bd5a]"
+                      >
+                        Send via WhatsApp <ExternalLink className="h-3.5 w-3.5" />
+                      </a>
+                      <button
+                        type="button"
+                        onClick={() => setIsSuccess(false)}
+                        className="px-6 py-2.5 bg-brand-charcoal/5 hover:bg-brand-charcoal/10 text-brand-charcoal text-xs font-semibold uppercase tracking-wider rounded-md transition-colors cursor-pointer"
+                      >
+                        Submit Another Spec
+                      </button>
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>

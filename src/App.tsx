@@ -13,7 +13,7 @@ import Process from './components/Process';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
-const WHATSAPP_URL = 'https://wa.me/qr/3ADHHUHPDYNTF1';
+const WHATSAPP_URL = 'https://wa.me/94772561647';
 const SITE_URL = 'https://rupasinghetimber.com';
 
 const PAGE_SEO: Record<string, { title: string; description: string }> = {
