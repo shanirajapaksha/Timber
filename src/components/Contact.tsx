@@ -23,7 +23,6 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [submitError, setSubmitError] = useState('');
-  const [whatsAppMessageUrl, setWhatsAppMessageUrl] = useState(WHATSAPP_URL);
 
   const projectOptions = [
     { value: 'residential', label: 'Doors & Frames' },
@@ -73,27 +72,9 @@ export default function Contact() {
       return;
     }
 
-    const whatsAppTab = window.open('', '_blank');
-    if (whatsAppTab) {
-      whatsAppTab.document.title = 'Preparing WhatsApp message...';
-      whatsAppTab.document.body.textContent = 'Preparing your WhatsApp message...';
-    }
-
     setIsSubmitting(true);
     try {
       const selectedProjectType = projectOptions.find((option) => option.value === formData.projectType)?.label;
-      const whatsAppMessage = [
-        'Hello Rupasinghe Timber Works,',
-        '',
-        'I just submitted a quotation request through your website.',
-        `Name: ${formData.name}`,
-        `Phone: ${formData.phone}`,
-        `Email: ${formData.email}`,
-        `Project type: ${selectedProjectType ?? 'Timber Project'}`,
-        `Details: ${formData.message}`,
-      ].join('\n');
-      const nextWhatsAppMessageUrl = `${WHATSAPP_URL}?text=${encodeURIComponent(whatsAppMessage)}`;
-
       const response = await fetch(WEB3FORMS_ENDPOINT, {
         method: 'POST',
         headers: {
@@ -118,7 +99,6 @@ export default function Contact() {
         throw new Error(`Form endpoint responded with ${response.status}`);
       }
 
-      setWhatsAppMessageUrl(nextWhatsAppMessageUrl);
       setIsSuccess(true);
       setFormData({
         name: '',
@@ -128,14 +108,7 @@ export default function Contact() {
         message: '',
       });
 
-      // Opening the tab during the original click avoids async popup blockers.
-      // WhatsApp still requires the visitor to confirm the final send action.
-      if (whatsAppTab) {
-        whatsAppTab.opener = null;
-        whatsAppTab.location.replace(nextWhatsAppMessageUrl);
-      }
     } catch {
-      whatsAppTab?.close();
       setSubmitError('We could not send your request right now. Please try again or contact us directly.');
     } finally {
       setIsSubmitting(false);
@@ -422,26 +395,16 @@ export default function Contact() {
                     </h4>
                     
                     <p className="text-sm text-brand-muted max-w-md mx-auto leading-relaxed mb-8">
-                      Your request was emailed successfully. WhatsApp should now open with the same details—please tap Send there to complete the WhatsApp message.
+                      Thank you for contacting Rupasinghe Timber Works. Your request was emailed successfully, and our team will contact you shortly.
                     </p>
 
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                      <a
-                        href={whatsAppMessageUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 rounded-md bg-[#25D366] px-6 py-2.5 text-xs font-semibold uppercase tracking-wider text-white transition-colors hover:bg-[#20bd5a]"
-                      >
-                        Send via WhatsApp <ExternalLink className="h-3.5 w-3.5" />
-                      </a>
-                      <button
-                        type="button"
-                        onClick={() => setIsSuccess(false)}
-                        className="px-6 py-2.5 bg-brand-charcoal/5 hover:bg-brand-charcoal/10 text-brand-charcoal text-xs font-semibold uppercase tracking-wider rounded-md transition-colors cursor-pointer"
-                      >
-                        Submit Another Spec
-                      </button>
-                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setIsSuccess(false)}
+                      className="px-6 py-2.5 bg-brand-charcoal/5 hover:bg-brand-charcoal/10 text-brand-charcoal text-xs font-semibold uppercase tracking-wider rounded-md transition-colors cursor-pointer"
+                    >
+                      Submit Another Spec
+                    </button>
                   </motion.div>
                 )}
               </AnimatePresence>
